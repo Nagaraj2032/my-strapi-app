@@ -7,34 +7,12 @@ Task-1: Internship
 - Created a daily Pull Request
 - Loom video submitted
 
-Task-2: Internship
-
--Objective:
--Create a Dockerfile to containerize the Strapi app and run it locally.
--Dockerfile Created
--Created .env file with required secrets and DB config
--Built Docker image
--Ran the container
-
-Output:
--Strapi running successfully inside Docker container
-
--Admin panel accessible and working
-=======
- Strapi Internship Task – Day 1
-
-# Author
-**Nagaraj Manickam**  
-DevOps Internship - PearlThoughts  
-Branch: `nagaraj`
-
----
-
-##  Task Overview
+##  Task Overview 1
 
 This task involved setting up the Strapi backend, running it locally, and creating a custom content type as part of the internship assignment.
 
 ---
+Task-2
 
 ##  Steps Completed
 
@@ -65,4 +43,4 @@ This task involved setting up the Strapi backend, running it locally, and creati
 ## Update the tasks done today and add on README.md
 
 
->>>>>>> 5505211 (Task 2: Dockerize Strapi App)
+> (Task 2: Dockerize Strapi App)
