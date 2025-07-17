@@ -39,8 +39,4 @@ Task-2
 - Created a daily pull request (PR) from `nagaraj` to `main` to track daily progress.
 
 ---
-
-## Update the tasks done today and add on README.md
-
-
 > (Task 2: Dockerize Strapi App)
