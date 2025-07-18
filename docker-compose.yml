@@ -1,0 +1,32 @@
+services:
+  strapi:
+    build: .
+    ports:
+      - "1337:1337"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: strapi
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: password
+    volumes:
+      - .:/app
+    networks:
+      - strapi-network
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    networks:
+      - strapi-network
+
+networks:
+  strapi-network:
