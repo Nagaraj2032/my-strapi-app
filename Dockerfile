@@ -1,22 +1,21 @@
-# Dockerfile
-
+# Base image
 FROM node:18-alpine
 
 # Set working directory
 WORKDIR /app
 
-# Copy only dependency files
-COPY package*.json ./
-
-# Install dependencies
+# Copy package files and install dependencies
+COPY package.json yarn.lock ./
 RUN yarn install
 
-# Copy rest of the app
+# Copy the rest of the application
 COPY . .
 
-# Expose Strapi default port
+# Build the admin UI
+RUN yarn build
+
+# Expose the port
 EXPOSE 1337
 
-# Start Strapi
-CMD ["yarn", "develop"]
-
+# Start the Strapi application
+CMD ["yarn", "start"]
