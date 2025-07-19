@@ -1,42 +1,26 @@
-<<<<<<< HEAD
-Task-1: Internship 
+## Internship Task Progress
 
-- Setup Strapi project
-- Created content-type: `internship-devops-task-1`
-- Pushed to GitHub (`nagaraj` branch)
-- Created a daily Pull Request
-- Loom video submitted
+### ✅ Task 1: Run Strapi Locally and Create Content Type
+- Cloned the official Strapi GitHub repository
+- Installed dependencies and ran the app locally
+- Created a sample content type using the admin dashboard
+- Explored project folder structure
+- Pushed setup to GitHub
 
-##  Task Overview 1
+### ✅ Task 2: Dockerize Strapi with PostgreSQL
+- Added Dockerfile for Strapi application
+- Created docker-compose.yml with PostgreSQL service
+- Configured `.env` file for database credentials
+- Verified local container startup with persistent database
+- Exposed Strapi Admin on port 1337
 
-This task involved setting up the Strapi backend, running it locally, and creating a custom content type as part of the internship assignment.
-
----
-Task-2
-
-##  Steps Completed
-
-### 1. ✅ Project Setup
-- Cloned the GitHub repository provided by the team.
-- Switched to a personal branch named `nagaraj`.
-- Installed dependencies using `yarn`.
-- Started Strapi locally using `yarn develop`.
-
-### 2. 🛠️ Admin Panel Setup
-- Opened Strapi in the browser at [http://localhost:1337/admin](http://localhost:1337/admin).
-- Created a new Strapi Admin account with my credentials.
-
-### 3. 🧱 Content Type Creation
-- Created a new **Collection Type** named `internship-devops-task-1`.
-- Added relevant fields as per instructions (e.g., title, description, date).
-- Saved.
-
-### 4. 💾 Commit and Push
-- Committed all changes related to the content type.
-- Pushed the changes to the `nagaraj` branch on GitHub.
-
-### 5. 🔀 Pull Request
-- Created a daily pull request (PR) from `nagaraj` to `main` to track daily progress.
+### ✅ Task 3: Add Nginx Reverse Proxy
+- Added `nginx.conf` for reverse proxy
+- Configured Nginx to expose Strapi Admin on port 80
+- Updated docker-compose.yml to include Nginx
+- Ensured all services run on the same Docker network
+- Verified app is accessible at `http://localhost`
 
 ---
-> (Task 2: Dockerize Strapi App)
+
+
