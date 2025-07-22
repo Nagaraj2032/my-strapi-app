@@ -1,23 +1,14 @@
-# Base image (lightweight Node.js)
-FROM node:18-alpine
+FROM node:18
 
-# Set working directory inside the container
 WORKDIR /app
 
-# Copy package.json and yarn.lock first (for caching)
-COPY package.json yarn.lock ./
+COPY package*.json ./
+RUN npm install
 
-# Install dependencies
-RUN yarn install
-
-# Copy the full source code into the container
 COPY . .
 
-# Build the admin UI
-RUN yarn build
+RUN npm run build
 
-# Expose default Strapi port
 EXPOSE 1337
 
-# Start the app
-CMD ["yarn", "start"]
+CMD ["npm", "run", "start"]

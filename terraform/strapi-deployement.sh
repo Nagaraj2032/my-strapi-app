@@ -2,7 +2,7 @@
 ###########
 
 #This will log the script output.
-LOGFILE="/var/log/user_data.log"
+LOGFILE="/var/log/strapi-deployment.log"
 exec > >(tee -a "$LOGFILE") 2>&1
 
 echo "Script started at $(date)"
@@ -25,7 +25,7 @@ docker volume create postgres_data
 docker run -d --name postgres --network strapi -e POSTGRES_DB=strapi -e POSTGRES_USER=strapi -e POSTGRES_PASSWORD=password -v postgres_data:/var/lib/postgresql/data postgres:15
 
 #Strapi
-docker run -d --name strapi --network strapi -p 1337:1337 -e DATABASE_CLIENT=postgres -e DATABASE_HOST=postgres -e DATABASE_PORT=5432 -e DATABASE_NAME=strapi -e DATABASE_USERNAME=strapi -e DATABASE_PASSWORD=password  nagaraj2032/strapi-app
+docker run -d --name strapi --network strapi -p 1337:1337 -e DATABASE_CLIENT=postgres -e DATABASE_HOST=postgres -e DATABASE_PORT=5432 -e DATABASE_NAME=strapi -e DATABASE_USERNAME=strapi -e DATABASE_PASSWORD=password  nagaraj2032/my-strapi-app
 
 
 # Configure the commands as needed :
@@ -36,7 +36,7 @@ docker run -d --name strapi --network strapi -p 1337:1337 -e DATABASE_CLIENT=pos
 # POSTGRES_PASSWORD: password     #Enter Your DB Password -Default is "password"
 
 # #Strapi
-# image: your-strapi-image #or use mine (nagaraj2032/strapi-app)
+# image: your-strapi-image #or use mine (nagaraj2032/my-strapi-app)
 # DATABASE_CLIENT: postgres       
 # DATABASE_HOST: postgres         # Enter your DB host address (container name)
 # DATABASE_PORT: 5432
