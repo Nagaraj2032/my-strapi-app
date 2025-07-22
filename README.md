@@ -22,3 +22,23 @@
 - Ensured all services run on the same Docker network
 - Verified app is accessible at `http://localhost`
 
+✅ Task 4: Deploy Strapi on EC2 using Terraform and Docker
+Created a new Terraform project folder with infrastructure code
+
+Wrote Terraform configuration to provision an EC2 instance on AWS
+
+Configured EC2 security group to allow HTTP (port 80) and SSH (port 22)
+
+Created user_data.sh to automate Docker installation and Strapi container startup
+
+Built and pushed custom Strapi Docker image to Docker Hub: nagaraj2032/strapi-app:latest
+
+Updated Terraform user_data to pull Docker image and run the container exposing port 1337
+
+Verified EC2 instance boots up and runs Strapi automatically
+
+Accessed Strapi Admin Panel via EC2 Public IP: http://<EC2_PUBLIC_IP>:1337
+![WhatsApp Image 2025-07-22 at 19 04 18_55d8fd16](https://github.com/user-attachments/assets/934b3040-e8d2-438f-accb-df896282bca2)
+
+
+
