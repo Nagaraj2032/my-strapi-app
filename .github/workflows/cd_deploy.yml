@@ -1,37 +1,44 @@
-name: 🚀 CD Deploy to EC2 using Terraform
+name: CD - Terraform Deploy
 
 on:
   workflow_dispatch:
 
 jobs:
   deploy:
-    name: CD Deploy
     runs-on: ubuntu-latest
 
+    env:
+      TF_DIR: my-strapi-app/terraform
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.5.0
+      - name: Read image tag
+        id: read_tag
+        run: |
+          IMAGE_TAG=$(cat image_tag.txt)
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          region: us-east-1
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
+        working-directory: ${{ env.TF_DIR }}
         run: terraform init
-        working-directory: ./terraform
 
       - name: Terraform Plan
-        run: terraform plan
-        working-directory: ./terraform
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform plan -var="image_tag=$IMAGE_TAG"
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
-        working-directory: ./terraform
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform apply -auto-approve -var="image_tag=$IMAGE_TAG"
+
+      - name: Show Strapi Admin URL
+        working-directory: ${{ env.TF_DIR }}
+        run: |
+          echo "Strapi Admin URL:"
+          terraform output strapi_address
