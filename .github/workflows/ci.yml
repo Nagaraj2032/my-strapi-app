@@ -21,9 +21,21 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Set IMAGE_TAG variable (Git SHA)
+        run: echo "IMAGE_TAG=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: nagaraj2032/strapi-app:latest
+          tags: nagaraj2032/strapi-app:${{ env.IMAGE_TAG }}
+
+      - name: Save Docker image tag to file
+        run: echo "${IMAGE_TAG}" > image_tag.txt
+
+      - name: Upload image tag artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: image_tag
+          path: image_tag.txt
