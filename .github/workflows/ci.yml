@@ -3,7 +3,7 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - nagaraj
+      - main
 
 jobs:
   build:
@@ -30,10 +30,15 @@ jobs:
           tags: nagaraj2032/strapi-app:latest
 
       - name: Save image tag
-        run: echo "latest" > image_tag.txt
+        run: |
+             
+             echo "IMAGE_TAG=latest" >> $GITHUB_ENV
 
-      - name: Upload image tag artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: image_tag
-          path: image_tag.txt
+      - name: Commit image tag to repo
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          echo "$IMAGE_TAG" > image_tag.txt
+          git add image_tag.txt
+          git commit -m "Update image tag to $IMAGE_TAG"
+          git push origin main
