@@ -1,31 +1,68 @@
 variable "aws_region" {
+  type    = string
   default = "us-east-2"
 }
 
 variable "ami" {
-  # Amazon Linux 2 AMI for us-east-2
-  default = "ami-0fb653ca2d3203ac1"
+  type = string
 }
 
 variable "instance_type" {
-  default = "t2.micro"
+  type    = string
+  default = "t3.micro"
+}
+
+variable "subnet_id" {
+  type = string
+}
+
+variable "security_group_id" {
+  type = string
 }
 
 variable "key_name" {
-  default = "naga-key"  # 🔁 Replace with your existing EC2 key pair
+  type = string
 }
 
+# Docker Hub credentials
 variable "docker_username" {
-  description = "Docker Hub username"
-  type        = string
+  type = string
 }
 
 variable "docker_password" {
-  description = "Docker Hub password"
-  type        = string
+  type      = string
+  sensitive = true
+}
+
+# Image name & tag
+variable "image_name" {
+  type    = string
+  default = "strapi-app"
 }
 
 variable "image_tag" {
-  description = "Docker image tag for the Strapi app"
+  description = "Tag of the Docker image to deploy (e.g., latest or CI SHA)"
   type        = string
+  default     = "latest"
+}
+
+# App secrets
+variable "app_keys" {
+  type    = string
+  default = "app_key1,app_key2,app_key3,app_key4"
+}
+
+variable "api_token_salt" {
+  type    = string
+  default = "Ubsn5To7CVuHcCi8QNz5Ag=="
+}
+
+variable "admin_jwt_secret" {
+  type    = string
+  default = "your_admin_jwt_secret"
+}
+
+variable "jwt_secret" {
+  type    = string
+  default = "your_jwt_secret"
 }
