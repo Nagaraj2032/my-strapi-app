@@ -1,8 +1,10 @@
-name: Terraform Deploy
+name: CD - Terraform Deploy
 
 on:
+  push:
+    branches:
+      - nagaraj
   workflow_dispatch:
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
