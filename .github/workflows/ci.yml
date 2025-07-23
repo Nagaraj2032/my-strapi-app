@@ -31,11 +31,12 @@ jobs:
           push: true
           tags: nagaraj2032/strapi-app:${{ env.IMAGE_TAG }}
 
-      - name: Save Docker image tag to file
-        run: echo "${IMAGE_TAG}" > image_tag.txt
+           - name: Save image tag
+        run: echo "latest" > image_tag.txt
 
       - name: Upload image tag artifact
         uses: actions/upload-artifact@v4
         with:
           name: image_tag
           path: image_tag.txt
+
