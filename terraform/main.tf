@@ -1,15 +1,14 @@
 provider "aws" {
-  region = "us-east-2"
+  region = var.aws_region
 }
 
-
 resource "aws_instance" "strapi" {
-  ami                         = "ami-0eb9d6fc9fab44d24" #Amazon Linux 2023 AMI for us-east-2
-  instance_type               = "t3.micro"
+  ami                    = var.ami
+  instance_type          = var.instance_type
+  subnet_id              = var.subnet_id
+  vpc_security_group_ids = [var.security_group_id]
+  key_name               = var.key_name
   associate_public_ip_address = true
-  vpc_security_group_ids      = ["sg-038861db81239cf2a"]   # I am using default VPC and Default VPC Security Group
-  subnet_id                   = "subnet-0cc813dd4d76bf797" # Using default Subnet (us-east-2b)
-  key_name                    = "strapi_key_raja"        #Create own keypair to have SSH access
 
   root_block_device {
     volume_size = 20
@@ -18,16 +17,26 @@ resource "aws_instance" "strapi" {
   user_data = base64encode(<<EOF
 #!/bin/bash
 yum update -y
-yum install git -y
-git clone https://github.com/nagaraj2032/my-strapi-app.git
-cd my-strapi-app/terraform
-chmod +x strapi-deployment.sh
-bash strapi-deployment.sh
+yum install -y docker
+systemctl enable docker
+systemctl start docker
+usermod -a -G docker ec2-user
+newgrp docker
+
+docker login -u ${var.docker_username} -p ${var.docker_password}
+docker run -d \
+  --name strapi-app \
+  -p 1337:1337 \
+  -e APP_KEYS="app_key1,app_key2,app_key3,app_key4" \
+  -e API_TOKEN_SALT="Ubsn5To7CVuHcCi8QNz5Ag==" \
+  -e ADMIN_JWT_SECRET="your_admin_jwt_secret" \
+  -e JWT_SECRET="your_jwt_secret" \
+  ${var.docker_username}/${var.image_tag}
 EOF
   )
 
   tags = {
-    Name  = "Strapi_Instance(raj)"
+    Name  = "Strapi_EC2_CICD"
     Owner = "nagaraj"
   }
 }

@@ -16,6 +16,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Download image tag artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: image_tag
+          path: .
+
       - name: Read image tag
         id: read_tag
         run: |
@@ -31,11 +37,11 @@ jobs:
 
       - name: Terraform Plan
         working-directory: ${{ env.TF_DIR }}
-        run: terraform plan -var="image_tag=$IMAGE_TAG"
+        run: terraform plan -var="image_tag=${{ env.IMAGE_TAG }}"
 
       - name: Terraform Apply
         working-directory: ${{ env.TF_DIR }}
-        run: terraform apply -auto-approve -var="image_tag=$IMAGE_TAG"
+        run: terraform apply -auto-approve -var="image_tag=${{ env.IMAGE_TAG }}"
 
       - name: Show Strapi Admin URL
         working-directory: ${{ env.TF_DIR }}

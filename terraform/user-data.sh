@@ -1,8 +1,16 @@
+user_data = <<-EOF
 #!/bin/bash
 yum update -y
-yum install docker -y
-service docker start
+yum install -y docker
+systemctl enable docker
+systemctl start docker
 usermod -a -G docker ec2-user
+newgrp docker
+
+# Docker Hub login
+docker login -u ${var.docker_username} -p ${var.docker_password}
+
+# Pull and run the correct image tag
 docker run -d \
   --name strapi-app \
   -p 1337:1337 \
@@ -10,4 +18,5 @@ docker run -d \
   -e API_TOKEN_SALT="Ubsn5To7CVuHcCi8QNz5Ag==" \
   -e ADMIN_JWT_SECRET="your_admin_jwt_secret" \
   -e JWT_SECRET="your_jwt_secret" \
-  nagaraj2032/strapi-app:latest
+  ${var.docker_username}/${var.image_tag}
+EOF

@@ -12,9 +12,20 @@ variable "instance_type" {
 }
 
 variable "key_name" {
-  default = "naga-key"  # 🔁 Replace with your existing EC2 key pair in us-east-2
+  default = "naga-key"  # 🔁 Replace with your existing EC2 key pair
 }
 
-variable "docker_image" {
-  default = "nagaraj2032/strapi-app"  # 🔁 Replace with your Docker Hub image
+variable "docker_username" {
+  description = "Docker Hub username"
+  type        = string
+}
+
+variable "docker_password" {
+  description = "Docker Hub password"
+  type        = string
+}
+
+variable "image_tag" {
+  description = "Docker image tag for the Strapi app"
+  type        = string
 }
