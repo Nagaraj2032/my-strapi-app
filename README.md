@@ -1,61 +1,43 @@
-# 🚀 Getting started with Strapi
+<<<<<<< HEAD
+## Internship Task Progress
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+### ✅ Task 1: Run Strapi Locally and Create Content Type
+- Cloned the official Strapi GitHub repository
+- Installed dependencies and ran the app locally
+- Created a sample content type using the admin dashboard
+- Explored project folder structure
+- Pushed setup to GitHub
 
-### `develop`
+### ✅ Task 2: Dockerize Strapi with PostgreSQL
+- Added Dockerfile for Strapi application
+- Created docker-compose.yml with PostgreSQL service
+- Configured `.env` file for database credentials
+- Verified local container startup with persistent database
+- Exposed Strapi Admin on port 1337
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+### ✅ Task 3: Add Nginx Reverse Proxy
+- Added `nginx.conf` for reverse proxy
+- Configured Nginx to expose Strapi Admin on port 80
+- Updated docker-compose.yml to include Nginx
+- Ensured all services run on the same Docker network
+- Verified app is accessible at `http://localhost`
 
-```
-npm run develop
-# or
-yarn develop
-```
+✅ Task 4: Deploy Strapi on EC2 using Terraform and Docker
+Created a new Terraform project folder with infrastructure code
 
-### `start`
+Wrote Terraform configuration to provision an EC2 instance on AWS
 
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
+Configured EC2 security group to allow HTTP (port 80) and SSH (port 22)
 
-```
-npm run start
-# or
-yarn start
-```
+Created user_data.sh to automate Docker installation and Strapi container startup
 
-### `build`
+Built and pushed custom Strapi Docker image to Docker Hub: nagaraj2032/strapi-app:latest
 
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
+Updated Terraform user_data to pull Docker image and run the container exposing port 1337
 
-```
-npm run build
-# or
-yarn build
-```
+Verified EC2 instance boots up and runs Strapi automatically
 
-## ⚙️ Deployment
+Accessed Strapi Admin Panel via EC2 Public IP: http://<EC2_PUBLIC_IP>:1337
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
 
-```
-yarn strapi deploy
-```
 
-## 📚 Learn more
-
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
-
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
-
-## ✨ Community
-
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
