@@ -1,7 +1,11 @@
 name: Deploy Strapi on EC2 using Terraform
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:        # Allow manual trigger from GitHub UI
+  push:
+    branches:
+      - nagaraj             # Trigger when pushing to nagaraj 
+
 
 jobs:
   deploy:
