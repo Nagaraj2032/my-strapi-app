@@ -25,4 +25,4 @@ docker volume create postgres_data
 docker run -d --name postgres --network strapi -e POSTGRES_DB=strapi -e POSTGRES_USER=strapi -e POSTGRES_PASSWORD=password -v postgres_data:/var/lib/postgresql/data postgres:15
  
 #Strapi
-docker run -d --name strapi --network strapi -p 1337:1337 -e DATABASE_CLIENT=postgres -e DATABASE_HOST=postgres -e DATABASE_PORT=5432 -e DATABASE_NAME=strapi -e DATABASE_USERNAME=strapi -e DATABASE_PASSWORD=password  kbalaji2212/projects:${image_tag}
+docker run -d --name strapi --network strapi -p 1337:1337 -e DATABASE_CLIENT=postgres -e DATABASE_HOST=postgres -e DATABASE_PORT=5432 -e DATABASE_NAME=strapi -e DATABASE_USERNAME=strapi -e DATABASE_PASSWORD=password  nagaraj2032/strapi-app:${var.image_tag}

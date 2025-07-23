@@ -15,7 +15,8 @@ variable "instance_type" {
 
 variable "key_name" {
   type = string
-default="strapi_key_raja"
+default="strapi_key_raja"       
+
 }
 
 variable "image_tag" {
