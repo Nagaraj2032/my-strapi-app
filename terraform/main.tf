@@ -31,7 +31,8 @@ docker run -d \
   -e API_TOKEN_SALT="Ubsn5To7CVuHcCi8QNz5Ag==" \
   -e ADMIN_JWT_SECRET="your_admin_jwt_secret" \
   -e JWT_SECRET="your_jwt_secret" \
-  ${var.docker_username}/${var.image_tag}
+  ${var.docker_username}/strapi-app:${var.image_tag}
+
 EOF
   )
 

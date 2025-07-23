@@ -1,8 +1,9 @@
 name: Terraform Destroy
-
 on:
+  push:
+    branches:
+      - nagaraj
   workflow_dispatch:
-
 permissions:
   contents: read
 
