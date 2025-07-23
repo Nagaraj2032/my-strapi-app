@@ -39,7 +39,7 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          echo "$IMAGE_TAG" > image_tag.txt
-          git add image_tag.txt
+          echo "$IMAGE_TAG" > dockertag.txt
+          git add dockertag.txt
           git commit -m "Update image tag to $IMAGE_TAG"
           git push origin main
