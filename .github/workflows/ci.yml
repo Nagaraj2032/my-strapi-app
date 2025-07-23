@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -21,17 +22,14 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Set IMAGE_TAG variable (Git SHA)
-        run: echo "IMAGE_TAG=${GITHUB_SHA::7}" >> $GITHUB_ENV
-
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: nagaraj2032/strapi-app:${{ env.IMAGE_TAG }}
+          tags: nagaraj2032/strapi-app:latest
 
-           - name: Save image tag
+      - name: Save image tag
         run: echo "latest" > image_tag.txt
 
       - name: Upload image tag artifact
@@ -39,4 +37,3 @@ jobs:
         with:
           name: image_tag
           path: image_tag.txt
-
