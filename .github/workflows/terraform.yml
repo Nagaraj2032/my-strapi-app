@@ -38,4 +38,4 @@ jobs:
  
       - name: Terraform Apply
         working-directory: ${{ env.TF_DIR }}
-        run: terraform apply -auto-approve -var="image_tag=$IMAGE_TAG"
+        run: terraform apply -auto-approve -var="image_tag=${{ env.IMAGE_TAG }}"
